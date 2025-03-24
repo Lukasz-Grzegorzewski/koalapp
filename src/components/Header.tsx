@@ -17,7 +17,7 @@ import { PackageIcon, TrolleyIcon } from "@sanity/icons";
 import Form from "next/form";
 import Link from "next/link";
 
-function Header() {
+export default function Header() {
   const { user } = useUser();
 
   const createClerkPasskey = async () => {
@@ -116,5 +116,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;
