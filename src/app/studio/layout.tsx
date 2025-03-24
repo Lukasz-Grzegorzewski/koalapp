@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Studio",
-  description: "sanity.io Studio description",
+  title: "Sanity.io Studio",
+  description: "Sanity.io Studio description",
 };
 
 export default function RootLayout({
