@@ -22,8 +22,7 @@ export default function ProductsGrid({ products }: { products: Product[] }) {
             exit={{ opacity: 0 }}
             className="flex justify-center"
           >
-            Product
-            {/* <ProductThumb product={product} /> */}
+            <ProductThumb product={product} />
           </motion.div>
         </AnimatePresence>
       ))}
