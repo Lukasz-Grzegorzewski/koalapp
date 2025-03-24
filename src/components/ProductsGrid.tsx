@@ -1,4 +1,8 @@
+"use client";
+
 import { Product } from "../../sanity.types";
+import { AnimatePresence, motion } from "motion/react";
+import ProductThumb from "./ProductThumb";
 
 export default function ProductsGrid({ products }: { products: Product[] }) {
   return (
@@ -8,8 +12,21 @@ export default function ProductsGrid({ products }: { products: Product[] }) {
         gap-4 mt-4
     "
     >
-      <div>Products grid</div>
-      <div>Product count : {products.length}</div>
+      {products?.map((product) => (
+        <AnimatePresence key={product._id}>
+          <motion.div
+            key="modal"
+            layout
+            initial={{ opacity: 0.2 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex justify-center"
+          >
+            Product
+            {/* <ProductThumb product={product} /> */}
+          </motion.div>
+        </AnimatePresence>
+      ))}
     </div>
   );
 }
