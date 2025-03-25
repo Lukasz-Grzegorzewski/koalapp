@@ -1,5 +1,6 @@
 "use client";
 
+import useBasketStore from "@/store/store";
 import { SignedIn } from "@clerk/clerk-react";
 import {
   ClerkLoaded,
@@ -19,6 +20,9 @@ import Link from "next/link";
 
 export default function Header() {
   const { user } = useUser();
+  const itemCount = useBasketStore((state) =>
+    state.items.reduce((total, item) => total + item.quantity, 0)
+  );
 
   const createClerkPasskey = async () => {
     try {
@@ -69,7 +73,18 @@ export default function Header() {
             sm:justify-start sm:flex-none
           "
           >
-            <TrolleyIcon className="w-6 h-6" /> Basket
+            <TrolleyIcon className="w-6 h-6" />
+            <span
+              className="
+                absolute
+                flex items-center justify-center
+                -top-2 -right-2 bg-red-500 text-xhite rounded-full w-5 h-5 text-xs
+              "
+              hidden={itemCount < 1}
+            >
+              {itemCount}
+            </span>
+            <span>Basket</span>
           </Link>
           <ClerkLoaded>
             <SignedIn>
