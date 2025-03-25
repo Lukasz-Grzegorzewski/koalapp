@@ -69,7 +69,7 @@ export default function Header() {
             sm:justify-start sm:flex-none
           "
           >
-            <TrolleyIcon className="w-6 h-6" />{" "}
+            <TrolleyIcon className="w-6 h-6" /> Basket
           </Link>
           <ClerkLoaded>
             <SignedIn>
@@ -78,11 +78,13 @@ export default function Header() {
                 className="
                 relative
                 flex flex-1 justify-center items-center
+                bg-blue-500 text-white font-bold py-2 px-4 rounded
+                hover:bg-blue-700
                 sm:justify-start sm:flex-none
                 space-x-2
               "
               >
-                <PackageIcon className="w-6 h-6" />
+                <PackageIcon className="w-6 h-6" /> Orders
               </Link>
             </SignedIn>
 
