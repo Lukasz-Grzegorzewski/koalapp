@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Product } from "../../sanity.types";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
+import ProductThumbImage from "./ProductThumbImage";
 
 export default function ProductThumb({ product }: { product: Product }) {
   const isOutOfStock = product.stock != null && product.stock <= 0;
@@ -18,27 +17,7 @@ export default function ProductThumb({ product }: { product: Product }) {
       `}
     >
       <div className="relative aspect-square w-full h-full overflow-hidden">
-        {product.image && (
-          <Image
-            className="object-contain transition-transform duration-300 group-hover:scale-105"
-            src={urlFor(product.image).url()}
-            alt={product.name || "Product image"}
-            fill
-            sizes="(max-width: 768px) 100wv, (max-width: 1200px) 50wv, 33vw"
-          />
-        )}
-
-        {isOutOfStock && (
-          <div
-            className="
-            absolute inset-0
-            flex items-center justify-center
-             bg-[rgba(0,0,0,0.5)]
-            "
-          >
-            <span className="font-bold text-lg text-white">Out of Stock</span>
-          </div>
-        )}
+        <ProductThumbImage isOutOfStock={isOutOfStock} product={product} />
       </div>
 
       <div className="p-4">
