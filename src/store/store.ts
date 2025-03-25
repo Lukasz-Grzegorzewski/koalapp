@@ -41,7 +41,7 @@ const useBasketStore = create<BasketState>()(
       removeItem: (productId: string) =>
         set((state) => ({
           items: state.items.map((item: BasketItemType) => {
-            if (item.product._id === productId && item.quantity > 1)
+            if (item.product._id === productId && item.quantity > 0)
               return { ...item, quantity: item.quantity - 1 };
             return item;
           }),
