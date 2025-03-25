@@ -13,7 +13,7 @@ export default function ProductThumbImage({
     <>
       {product.image && (
         <Image
-          className="object-contain transition-transform duration-300 group-hover:scale-105"
+          className="object-contain transition-transform duration-300 group-hover:scale-105 p-6"
           src={urlFor(product.image).url()}
           alt={product.name || "Product image"}
           fill
