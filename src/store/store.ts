@@ -40,11 +40,15 @@ const useBasketStore = create<BasketState>()(
         }),
       removeItem: (productId: string) =>
         set((state) => ({
-          items: state.items.map((item: BasketItemType) => {
-            if (item.product._id === productId && item.quantity > 0)
-              return { ...item, quantity: item.quantity - 1 };
-            return item;
-          }),
+          items: state.items
+            .map((item: BasketItemType) => {
+              if (item.product._id === productId)
+                if (item.quantity > 1)
+                  return { ...item, quantity: item.quantity - 1 };
+                else return undefined;
+              return item;
+            })
+            .filter((item) => !!item),
         })),
       clearBasket: () => set({ items: [] }),
       getTotalPrice: () => {
