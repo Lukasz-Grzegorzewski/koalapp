@@ -18,11 +18,10 @@ export default function RootLayout({
     <ClerkProvider dynamic>
       <html lang="en">
         <body>
-          <main>
+          <main className="flex flex-col h-screen">
             <Header />
-            {children}
+            <div className="grow-1">{children}</div>
           </main>
-
           <SanityLive />
         </body>
       </html>

@@ -2,22 +2,22 @@ import { Product } from "../../sanity.types";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-export type BasketItemType = {
+export type BasketItemT = {
   product: Product;
   quantity: number;
 };
 
-type BasketState = {
-  items: BasketItemType[];
+type BasketStateT = {
+  items: BasketItemT[];
   addItem: (product: Product) => void;
   removeItem: (productId: string) => void;
   clearBasket: () => void;
   getTotalPrice: () => number;
   getItemCount: (productId: string) => number;
-  getGroupedItems: () => BasketItemType[];
+  getGroupedItems: () => BasketItemT[];
 };
 
-const useBasketStore = create<BasketState>()(
+const useBasketStore = create<BasketStateT>()(
   persist(
     (set, get) => ({
       items: [],
@@ -41,7 +41,7 @@ const useBasketStore = create<BasketState>()(
       removeItem: (productId: string) =>
         set((state) => ({
           items: state.items
-            .map((item: BasketItemType) => {
+            .map((item: BasketItemT) => {
               if (item.product._id === productId)
                 if (item.quantity > 1)
                   return { ...item, quantity: item.quantity - 1 };
