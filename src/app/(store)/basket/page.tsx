@@ -1,5 +1,9 @@
 "use client";
 
+import {
+  createCheckoutSession,
+  MetadataT,
+} from "@/actions/createCheckoutSession";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
 import { urlFor } from "@/sanity/lib/image";
@@ -11,8 +15,6 @@ import { useEffect, useState } from "react";
 
 export default function BasketPage() {
   const groupedItems = useBasketStore((state) => state.getGroupedItems());
-  const { getItemCount } = useBasketStore();
-
   const { isSignedIn } = useAuth();
   const { user } = useUser();
   const router = useRouter();
@@ -28,15 +30,20 @@ export default function BasketPage() {
   const handleCheckout = async () => {
     if (!isSignedIn) return;
     setIsLoading(true);
+
     try {
-      // TODO Stripe Session
-      await new Promise<void>((resolve) => {
-        setTimeout(() => {
-          resolve();
-        }, 2000);
-      });
+      const metadata: MetadataT = {
+        orderNumber: crypto.randomUUID(),
+        customerName: user?.fullName ?? "Unknown",
+        customerEmail: user?.emailAddresses[0].emailAddress ?? "Unknown",
+        clerkUserId: user!.id,
+      };
+
+      const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+
+      if (checkoutUrl) window.location.href = checkoutUrl;
     } catch (error) {
-      console.error(error);
+      console.error("Error creating checkout session", error);
     } finally {
       setIsLoading(false);
     }
