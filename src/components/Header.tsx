@@ -27,8 +27,8 @@ export default function Header() {
   const createClerkPasskey = async () => {
     try {
       // Free from CLERK only for development
-      const response = await user?.createPasskey();
-      console.log(`response => `, response);
+      await user?.createPasskey();
+      console.log("Passkey created => ");
     } catch (err) {
       console.error(err);
     }

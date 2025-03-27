@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
     try {
       const order = await createOrderInSanity(session);
-      console.log("Ordfer created in Sanity:", order);
+      console.log("Ordfer created in Sanity. ID :", order._id);
     } catch (error) {
       console.error("Error creating order in sanity.io :", error);
       return NextResponse.json(
