@@ -10,8 +10,9 @@ export const client = createClient({
   useCdn: true,
   //  click-to-edit features in Sanity
   stega: {
-    studioUrl: process.env.NEXT_PUBLIC_VERCEL_URL
-      ? `${process.env.NEXT_PUBLIC_VERCEL_URL}/studio`
-      : `${process.env.NEXT_PUBLIC_BASE_URL}/studio`,
+    studioUrl:
+      process.env.NODE_ENV === "production"
+        ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/studio`
+        : `${process.env.NEXT_PUBLIC_BASE_URL}/studio`,
   },
 });

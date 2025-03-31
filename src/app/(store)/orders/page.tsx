@@ -10,7 +10,6 @@ export default async function OrdersPage() {
   if (!userId) return redirect("/");
 
   const orders = await getOrdersByUserId(userId);
-  console.log(orders[0].products);
 
   return (
     <div className="flex flex-col items-center justify-center h-full bg-gray-50 p-4">
